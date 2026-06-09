@@ -84,7 +84,7 @@ const notifications = ref<NotificationItem[]>([
     isRead: false,
     message: '描述信息描述信息描述信息',
     title: '跳转外部链接示例',
-    link: 'https://doc.vben.pro',
+    link: 'https://github.com/SkiffBoy/flex-app-web',
   },
 ]);
 
@@ -247,7 +247,7 @@ onBeforeMount(() => {
         :avatar
         :menus
         :text="userStore.userInfo?.realName"
-        description="ann.vben@gmail.com"
+        description=""
         tag-text="Pro"
         trigger="both"
         @logout="handleLogout"

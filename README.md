@@ -1,26 +1,22 @@
 <div align="center">
-  <a href="https://github.com/anncwb/vue-vben-admin">
-    <img alt="VbenAdmin Logo" width="215" src="https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp">
+  <a href="https://github.com/SkiffBoy/flex-app-web">
+    <img alt="Flex App Logo" width="215" src="https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp">
   </a>
   <br>
   <br>
 
-[![license](https://img.shields.io/github/license/anncwb/vue-vben-admin.svg)](LICENSE)
+[![license](https://img.shields.io/github/license/SkiffBoy/flex-app-web.svg)](LICENSE)
 
-  <h1>Vue Vben Admin</h1>
+  <h1>Flex App</h1>
 </div>
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vbenjs_vue-vben-admin&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vbenjs_vue-vben-admin) [![codeql](https://github.com/vbenjs/vue-vben-admin/actions/workflows/codeql.yml/badge.svg)](https://github.com/vbenjs/vue-vben-admin/actions/workflows/codeql.yml) [![build](https://github.com/vbenjs/vue-vben-admin/actions/workflows/build.yml/badge.svg)](https://github.com/vbenjs/vue-vben-admin/actions/workflows/build.yml) [![ci](https://github.com/vbenjs/vue-vben-admin/actions/workflows/ci.yml/badge.svg)](https://github.com/vbenjs/vue-vben-admin/actions/workflows/ci.yml) [![deploy](https://github.com/vbenjs/vue-vben-admin/actions/workflows/deploy.yml/badge.svg)](https://github.com/vbenjs/vue-vben-admin/actions/workflows/deploy.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SkiffBoy_flex-app-web&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=SkiffBoy_flex-app-web) [![codeql](https://github.com/SkiffBoy/flex-app-web/actions/workflows/codeql.yml/badge.svg)](https://github.com/SkiffBoy/flex-app-web/actions/workflows/codeql.yml) [![build](https://github.com/SkiffBoy/flex-app-web/actions/workflows/build.yml/badge.svg)](https://github.com/SkiffBoy/flex-app-web/actions/workflows/build.yml) [![ci](https://github.com/SkiffBoy/flex-app-web/actions/workflows/ci.yml/badge.svg)](https://github.com/SkiffBoy/flex-app-web/actions/workflows/ci.yml) [![deploy](https://github.com/SkiffBoy/flex-app-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/SkiffBoy/flex-app-web/actions/workflows/deploy.yml)
 
-**English** | [中文](./README.zh-CN.md) | [日本語](./README.ja-JP.md)
+**English** | [中文](./README.zh-CN.md)
 
 ## Introduction
 
-Vue Vben Admin is a free and open source middle and back-end template. Using the latest `vue3`, `vite`, `TypeScript` and other mainstream technology development, the out-of-the-box middle and back-end front-end solutions can also be used for learning reference.
-
-## Upgrade Notice
-
-This is the latest version, 5.0, and it is not compatible with previous versions. If you are starting a new project, it is recommended to use the latest version. If you wish to view the old version, please use the [v2 branch](https://github.com/vbenjs/vue-vben-admin/tree/v2).
+Flex App is an application built on Vue Vben Admin. Forked from [Vue Vben Admin](https://github.com/vbenjs/vue-vben-admin). Created on June 9, 2026.
 
 ## Features
 
@@ -32,38 +28,38 @@ This is the latest version, 5.0, and it is not compatible with previous versions
 
 ## Preview
 
-- [Vben Admin](https://vben.pro/) - Full version Chinese site
+- [Flex App](https://github.com/SkiffBoy/flex-app-web) - Full version Chinese site
 
-Test Account: vben/123456
+Test Account: admin/123456
 
 <div align="center">
-  <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview1.png">
-  <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview2.png">
-  <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
+  <img alt="Flex App Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview1.png">
+  <img alt="Flex App Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview2.png">
+  <img alt="Flex App Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
 </div>
 
 ### Use Gitpod
 
 Open the project in Gitpod (free online dev environment for GitHub) and start coding immediately.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vbenjs/vue-vben-admin)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/SkiffBoy/flex-app-web)
 
 ## Documentation
 
-[Document](https://doc.vben.pro/)
+[Document](https://github.com/SkiffBoy/flex-app-web)
 
 ## Install and Use
 
 1. Get the project code
 
 ```bash
-git clone https://github.com/vbenjs/vue-vben-admin.git
+git clone https://github.com/SkiffBoy/flex-app-web.git
 ```
 
 2. Install dependencies
 
 ```bash
-cd vue-vben-admin
+cd flex-app-web
 npm i -g corepack
 pnpm install
 ```
@@ -82,11 +78,11 @@ pnpm build
 
 ## Change Log
 
-[CHANGELOG](https://github.com/vbenjs/vue-vben-admin/releases)
+[CHANGELOG](https://github.com/SkiffBoy/flex-app-web/releases)
 
 ## How to Contribute
 
-You are very welcome to join! [Raise an issue](https://github.com/anncwb/vue-vben-admin/issues/new/choose) or submit a Pull Request.
+You are very welcome to join! [Raise an issue](https://github.com/SkiffBoy/flex-app-web/issues/new/choose) or submit a Pull Request.
 
 **Pull Request Process:**
 
@@ -124,34 +120,12 @@ Support modern browsers, not IE
 
 ## Maintainer
 
-[@Vben](https://github.com/anncwb)
+[@SkiffBoy](https://github.com/SkiffBoy)
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=vbenjs/vue-vben-admin&type=Date)](https://star-history.com/#vbenjs/vue-vben-admin&Date)
-
-## Donate
-
-If you think this project is helpful to you, you can help the author buy a cup of coffee to show your support!
-
-![donate](https://unpkg.com/@vbenjs/static-source@0.1.7/source/sponsor.png)
-
-<a style="display: block;width: 100px;height: 50px;line-height: 50px; color: #fff;text-align: center; background: #408aee;border-radius: 4px;" href="https://www.paypal.com/paypalme/cvvben">Paypal Me</a>
-
-## Contributors
-
-<a href="https://openomy.app/github/vbenjs/vue-vben-admin" target="_blank" style="display: block; width: 100%;" align="center">
-  <img src="https://openomy.app/svg?repo=vbenjs/vue-vben-admin&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
- </a>
-
-<a href="https://github.com/vbenjs/vue-vben-admin/graphs/contributors">
-  <img alt="Contributors" src="https://contrib.rocks/image?repo=vbenjs/vue-vben-admin" />
-</a>
-
-## Discord
-
-- [Github Discussions](https://github.com/anncwb/vue-vben-admin/discussions)
+[![Star History Chart](https://api.star-history.com/svg?repos=SkiffBoy/flex-app-web&type=Date)](https://star-history.com/#SkiffBoy/flex-app-web&Date)
 
 ## License
 
-[MIT © Vben-2020](./LICENSE)
+[MIT © Vben-2020](./LICENSE) - Forked from [Vue Vben Admin](https://github.com/vbenjs/vue-vben-admin)

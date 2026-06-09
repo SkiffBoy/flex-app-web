@@ -44,7 +44,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
       nitroMockOptions: {},
       print: !isBuild,
       printInfoMap: {
-        'Vben Admin Docs': 'https://doc.vben.pro',
+        'Flex App': 'https://github.com/SkiffBoy/flex-app-web',
       },
       pwa: true,
       pwaOptions: getDefaultPwaOptions(appTitle),

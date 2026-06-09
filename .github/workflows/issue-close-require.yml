@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   close-issues:
-    if: github.repository == 'vbenjs/vue-vben-admin'
+    if: github.repository == 'SkiffBoy/flex-app-web'
     runs-on: ubuntu-latest
     steps:
       # 关闭未活动的 Issues

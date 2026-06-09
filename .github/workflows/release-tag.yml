@@ -17,7 +17,7 @@ permissions:
 jobs:
   release:
     name: Create Release
-    if: github.repository == 'vbenjs/vue-vben-admin'
+    if: github.repository == 'SkiffBoy/flex-app-web'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

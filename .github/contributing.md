@@ -1,6 +1,6 @@
-# Vben Admin Contributing Guide
+# Flex App Contributing Guide
 
-Hi! We're really excited that you are interested in contributing to Vben Admin. Before submitting your contribution, please make sure to take a moment and read through the following guidelines:
+Hi! We're really excited that you are interested in contributing to Flex App. Before submitting your contribution, please make sure to take a moment and read through the following guidelines:
 
 - [Pull Request Guidelines](#pull-request-guidelines)
 

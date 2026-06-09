@@ -7,7 +7,7 @@ declare module 'vue-router' {
   interface RouteMeta extends IRouteMeta {}
 }
 
-export interface VbenAdminProAppConfigRaw {
+export interface FlexAppProAppConfigRaw {
   VITE_GLOB_API_URL: string;
   VITE_GLOB_AUTH_DINGDING_CLIENT_ID: string;
   VITE_GLOB_AUTH_DINGDING_CORP_ID: string;
@@ -27,6 +27,6 @@ export interface ApplicationConfig {
 
 declare global {
   interface Window {
-    _VBEN_ADMIN_PRO_APP_CONF_: VbenAdminProAppConfigRaw;
+    _FLEX_APP_PRO_APP_CONF_: FlexAppProAppConfigRaw;
   }
 }

@@ -38,7 +38,7 @@ function getResponse() {
         @click="
           downloadFileFromUrl({
             source:
-              'https://codeload.github.com/vbenjs/vue-vben-admin-doc/zip/main',
+              'https://codeload.github.com/SkiffBoy/flex-app-web/zip/main',
             target: '_self',
           })
         "

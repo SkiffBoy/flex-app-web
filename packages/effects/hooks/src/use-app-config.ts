@@ -1,6 +1,6 @@
 import type {
   ApplicationConfig,
-  VbenAdminProAppConfigRaw,
+  FlexAppProAppConfigRaw,
 } from '@vben/types/global';
 
 /**
@@ -10,10 +10,10 @@ export function useAppConfig(
   env: Record<string, any>,
   isProduction: boolean,
 ): ApplicationConfig {
-  // 生产环境下，直接使用 window._VBEN_ADMIN_PRO_APP_CONF_ 全局变量
+  // 生产环境下，直接使用 window._FLEX_APP_PRO_APP_CONF_ 全局变量
   const config = isProduction
-    ? window._VBEN_ADMIN_PRO_APP_CONF_
-    : (env as VbenAdminProAppConfigRaw);
+    ? window._FLEX_APP_PRO_APP_CONF_
+    : (env as FlexAppProAppConfigRaw);
 
   const {
     VITE_GLOB_API_URL,

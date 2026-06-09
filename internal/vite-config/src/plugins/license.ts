@@ -23,18 +23,7 @@ async function viteLicensePlugin(
     generateBundle: {
       handler(_options, bundle) {
         const date = dateUtil().format('YYYY-MM-DD ');
-        const copyrightText = `/*!
-  * Vben Admin
-  * Version: ${version}
-  * Author: vben
-  * Copyright (C) 2024 Vben
-  * License: MIT License
-  * Description: ${description}
-  * Date Created: ${date}
-  * Homepage: ${homepage}
-  * Contact: ann.vben@gmail.com
-*/
-              `.trim();
+        const copyrightText = '';
 
         for (const [, fileContent] of Object.entries(bundle)) {
           if (fileContent.type === 'chunk' && fileContent.isEntry) {

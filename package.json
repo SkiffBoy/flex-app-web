@@ -1,27 +1,21 @@
 {
-  "name": "vben-admin-monorepo",
+  "name": "flex-app-web-monorepo",
   "version": "5.7.0",
   "private": true,
   "keywords": [
-    "monorepo",
-    "turbo",
-    "vben",
-    "vben admin",
-    "vben pro",
+    "flex-app",
+    "admin",
+    "management",
     "vue",
-    "vue admin",
-    "vue vben admin",
-    "vue vben admin pro",
-    "vue3"
+    "frontend"
   ],
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": "vbenjs/vue-vben-admin.git",
+  "homepage": "https://github.com/SkiffBoy/flex-app-web",
+  "bugs": "https://github.com/SkiffBoy/flex-app-web/issues",
+  "repository": "SkiffBoy/flex-app-web.git",
   "license": "MIT",
   "author": {
-    "name": "vben",
-    "email": "ann.vben@gmail.com",
-    "url": "https://github.com/anncwb"
+    "name": "SkiffBoy",
+    "url": "https://github.com/SkiffBoy"
   },
   "type": "module",
   "scripts": {

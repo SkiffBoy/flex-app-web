@@ -2,11 +2,11 @@
   "name": "@vben/oxfmt-config",
   "version": "5.7.0",
   "private": true,
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
+  "homepage": "https://github.com/SkiffBoy/flex-app-web",
+  "bugs": "https://github.com/SkiffBoy/flex-app-web/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "url": "git+https://github.com/SkiffBoy/flex-app-web.git",
     "directory": "internal/lint-configs/oxfmt-config"
   },
   "license": "MIT",

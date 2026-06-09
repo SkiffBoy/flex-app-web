@@ -22,12 +22,12 @@ defineOptions({
 withDefaults(defineProps<Props>(), {
   description:
     '是一个现代化开箱即用的中后台解决方案，采用最新的技术栈，包括 Vue 3.0、Vite、TailwindCSS 和 TypeScript 等前沿技术，代码规范严谨，提供丰富的配置选项，旨在为中大型项目的开发提供现成的开箱即用解决方案及丰富的示例，同时，它也是学习和深入前端技术的一个极佳示例。',
-  name: 'Vben Admin',
+  name: 'Flex App',
   title: '关于项目',
 });
 
 declare global {
-  const __VBEN_ADMIN_METADATA__: {
+  const __FLEX_APP_METADATA__: {
     authorEmail: string;
     authorName: string;
     authorUrl: string;
@@ -60,7 +60,7 @@ const {
   license,
   version,
   // vite inject-metadata 插件注入的全局变量
-} = __VBEN_ADMIN_METADATA__ || {};
+} = __FLEX_APP_METADATA__ || {};
 
 const vbenDescriptionItems: DescriptionItem[] = [
   {

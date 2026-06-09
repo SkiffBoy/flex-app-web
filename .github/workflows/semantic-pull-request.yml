@@ -10,7 +10,7 @@ on:
 jobs:
   main:
     name: Semantic Pull Request
-    if: github.repository == 'vbenjs/vue-vben-admin'
+    if: github.repository == 'SkiffBoy/flex-app-web'
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR title
