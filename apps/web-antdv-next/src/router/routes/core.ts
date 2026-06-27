@@ -83,6 +83,16 @@ const coreRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        // 密码过期软拒改密页（spec §4.5.5）
+        name: 'ChangePassword',
+        path: 'change-password',
+        component: () =>
+          import('#/views/_core/authentication/change-password.vue'),
+        meta: {
+          title: '修改密码',
+        },
+      },
+      {
         name: 'Register',
         path: 'register',
         component: () => import('#/views/_core/authentication/register.vue'),

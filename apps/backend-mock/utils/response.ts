@@ -4,7 +4,7 @@ import { setResponseStatus } from 'h3';
 
 export function useResponseSuccess<T = any>(data: T) {
   return {
-    code: 0,
+    code: 'ok',
     data,
     error: null,
     message: 'ok',
@@ -34,7 +34,7 @@ export function usePageResponseSuccess<T = any>(
 
 export function useResponseError(message: string, error: any = null) {
   return {
-    code: -1,
+    code: 'error',
     data: null,
     error,
     message,

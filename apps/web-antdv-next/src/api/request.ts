@@ -47,17 +47,21 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
 
   /**
    * 刷新token逻辑
+   *
+   * requestClient 已剥 Result 外层（responseReturn:'data'），resp 直接是 LoginResult，
+   * 取 tokenValue。
    */
   async function doRefreshToken() {
     const accessStore = useAccessStore();
     const resp = await refreshTokenApi();
-    const newToken = resp.data;
+    const newToken = resp.tokenValue;
     accessStore.setAccessToken(newToken);
     return newToken;
   }
 
   function formatToken(token: null | string) {
-    return token ? `Bearer ${token}` : null;
+    // 后端 Sa-Token 配置 token-name=Flex-Token，前端发纯 tokenValue（不带 Bearer 前缀）
+    return token ?? null;
   }
 
   // 请求头处理
@@ -65,7 +69,7 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
     fulfilled: async (config) => {
       const accessStore = useAccessStore();
 
-      config.headers.Authorization = formatToken(accessStore.accessToken);
+      config.headers['Flex-Token'] = formatToken(accessStore.accessToken);
       config.headers['Accept-Language'] = preferences.app.locale;
       return config;
     },
@@ -76,7 +80,8 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
     defaultResponseInterceptor({
       codeField: 'code',
       dataField: 'data',
-      successCode: 0,
+      // 对齐后端 Result 的 CODE_OK = "ok"（spec §6.3，三态字符串而非数字）
+      successCode: 'ok',
     }),
   );
 

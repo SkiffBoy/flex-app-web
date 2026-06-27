@@ -37,6 +37,7 @@
     "html-minifier-terser": "catalog:",
     "nitropack": "catalog:",
     "resolve.exports": "catalog:",
+    "vite-import-maps": "catalog:",
     "vite-plugin-pwa": "catalog:",
     "vite-plugin-vue-devtools": "catalog:"
   },

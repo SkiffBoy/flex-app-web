@@ -5,10 +5,16 @@ import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { startProgress, stopProgress } from '@vben/utils';
 
+import { message } from 'antdv-next';
+
 import { accessRoutes, coreRouteNames } from '#/router/routes';
-import { useAuthStore } from '#/store';
+import { useAuthStore, usePluginStore } from '#/store';
 
 import { generateAccess } from './access';
+import { loadAllPlugins } from './plugin-routes';
+
+// auth.kickout 事件仅订阅一次（跨导航守卫，useSSE 为单例）
+let kickoutBound = false;
 
 /**
  * 通用守卫配置
@@ -52,6 +58,14 @@ function setupAccessGuard(router: Router) {
 
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
+      // 密码过期软拒（spec §4.5.5）：除改密页/登录页外，强制跳改密页
+      if (
+        authStore.passwordExpired &&
+        to.name !== 'ChangePassword' &&
+        to.name !== 'Login'
+      ) {
+        return { path: '/auth/change-password', replace: true };
+      }
       if (to.path === LOGIN_PATH && accessStore.accessToken) {
         return decodeURIComponent(
           (to.query?.redirect as string) ||
@@ -87,6 +101,10 @@ function setupAccessGuard(router: Router) {
 
     // 是否已经生成过动态路由
     if (accessStore.isAccessChecked) {
+      // 密码过期软拒：已生成路由也强制跳改密页（防止改密前进入业务页）
+      if (authStore.passwordExpired) {
+        return { path: '/auth/change-password', replace: true };
+      }
       return true;
     }
 
@@ -106,7 +124,42 @@ function setupAccessGuard(router: Router) {
     // 保存菜单信息和路由信息
     accessStore.setAccessMenus(accessibleMenus);
     accessStore.setAccessRoutes(accessibleRoutes);
+
+    // 动态加载插件（spec §4.2）：拉 metadata → import bundle → addRoute。
+    // 放在 setIsAccessChecked 之前，让首次重定向能命中已注入的插件路由。
+    const pluginStore = usePluginStore();
+    if (!pluginStore.initialized) {
+      const loaded = await loadAllPlugins(router);
+      pluginStore.setLoaded(loaded);
+
+      // 注入插件菜单到侧边栏（spec §5.4）：把插件声明的菜单追加到 accessMenus。
+      const pluginMenus = pluginStore.getAllMenus();
+      if (pluginMenus.length > 0) {
+        accessStore.setAccessMenus([
+          ...accessStore.accessMenus,
+          ...pluginMenus.map((m) => ({
+            path: m.path,
+            name: m.name,
+            icon: m.icon,
+          })),
+        ]);
+      }
+    }
+
     accessStore.setIsAccessChecked(true);
+
+    // SSE 实时推送（spec §4）：登录后建立连接，通知/踢出共用
+    const { useSSE } = await import('#/composables/use-sse');
+    const sse = useSSE();
+    sse.connect();
+    // 被管理员踢出/其他设备登录 → 登出并提示（守卫仅订阅一次）
+    if (!kickoutBound) {
+      sse.on('auth.kickout', () => {
+        message.warning('您的账号已被管理员强制下线');
+        authStore.logout();
+      });
+      kickoutBound = true;
+    }
     const redirectPath = (from.query.redirect ??
       (to.path === preferences.app.defaultHomePath
         ? userInfo.homePath || preferences.app.defaultHomePath

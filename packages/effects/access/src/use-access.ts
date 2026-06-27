@@ -29,6 +29,12 @@ function useAccess() {
   function hasAccessByCodes(codes: string[]) {
     const userCodesSet = new Set(accessStore.accessCodes);
 
+    // 超管通配：权限码集合含 '*' 时，任意 code 均通过（对齐后端 SaToken 通配语义）。
+    // 后端超管 permissions 返回 ["*"]，此处须匹配，否则超管看不到 v-access:code 按钮。
+    if (userCodesSet.has('*')) {
+      return true;
+    }
+
     const intersection = codes.filter((item) => userCodesSet.has(item));
     return intersection.length > 0;
   }

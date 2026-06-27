@@ -8,6 +8,8 @@ import { appCopyrightPreferences, defineOverridesPreferences } from '@vben/prefe
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
   app: {
+    accessMode: 'backend', // 后端菜单驱动（GET /api/menu/all → generateAccessible）
+    enableRefreshToken: true, // 开启 token 自动刷新（401 → /auth/refresh 续期）
     name: import.meta.env.VITE_APP_TITLE,
   },
   copyright: appCopyrightPreferences,

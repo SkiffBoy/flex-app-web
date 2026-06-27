@@ -11,6 +11,7 @@ import { notification } from 'antdv-next';
 import { defineStore } from 'pinia';
 
 import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
+import { useSSE } from '#/composables/use-sse';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -19,6 +20,8 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
 
   const loginLoading = ref(false);
+  /** 密码过期软拒标记（后端登录返回 passwordExpired，路由守卫据此跳改密页）。 */
+  const passwordExpired = ref(false);
 
   /**
    * 异步处理登录操作
@@ -33,11 +36,14 @@ export const useAuthStore = defineStore('auth', () => {
     let userInfo: null | UserInfo = null;
     try {
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
+      // 后端登录返回 tokenValue（Sa-Token）+ passwordExpired，映射为 accessStore.accessToken
+      const { tokenValue, passwordExpired: expired } = await loginApi(params);
 
-      // 如果成功获取到 accessToken
-      if (accessToken) {
-        accessStore.setAccessToken(accessToken);
+      // 如果成功获取到 token
+      if (tokenValue) {
+        accessStore.setAccessToken(tokenValue);
+        // 密码过期软拒（spec §4.5.5）：标记，由路由守卫跳改密页
+        passwordExpired.value = !!expired;
 
         // 获取用户信息并存储到 accessStore 中
         const [fetchUserInfoResult, accessCodes] = await Promise.all([
@@ -52,6 +58,9 @@ export const useAuthStore = defineStore('auth', () => {
 
         if (accessStore.loginExpired) {
           accessStore.setLoginExpired(false);
+        } else if (passwordExpired.value) {
+          // 密码过期：强制跳改密页（软拒，改完才放行）
+          await router.push('/auth/change-password');
         } else {
           onSuccess
             ? await onSuccess?.()
@@ -60,7 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
               );
         }
 
-        if (userInfo?.realName) {
+        if (!passwordExpired.value && userInfo?.realName) {
           notification.success({
             description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
             duration: 3,
@@ -78,6 +87,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function logout(redirect: boolean = true) {
+    // SSE 实时推送：登出时断开连接（spec §4）
+    const { disconnect: disconnectSSE } = useSSE();
+    disconnectSSE();
     try {
       await logoutApi();
     } catch {
@@ -103,8 +115,13 @@ export const useAuthStore = defineStore('auth', () => {
     return userInfo;
   }
 
+  function setPasswordExpired(value: boolean) {
+    passwordExpired.value = value;
+  }
+
   function $reset() {
     loginLoading.value = false;
+    passwordExpired.value = false;
   }
 
   return {
@@ -113,5 +130,7 @@ export const useAuthStore = defineStore('auth', () => {
     fetchUserInfo,
     loginLoading,
     logout,
+    passwordExpired,
+    setPasswordExpired,
   };
 });

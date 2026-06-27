@@ -1,0 +1,23 @@
+{
+  "name": "@flex/plugin-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "copy-to-backend": "node scripts/copy-to-backend.mjs"
+  },
+  "dependencies": {
+    "@flex/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@vben/tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "catalog:",
+    "antdv-next": "catalog:",
+    "pinia": "catalog:",
+    "vite": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  }
+}

@@ -1,69 +1,43 @@
 <script lang="ts" setup>
 import type { VbenFormSchema } from '@vben/common-ui';
-import type { BasicOption } from '@vben/types';
 
-import { computed, markRaw } from 'vue';
+import { computed, markRaw, ref } from 'vue';
 
-import { AuthenticationLogin, SliderCaptcha, z } from '@vben/common-ui';
+import { AuthenticationLogin, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 import { useAuthStore } from '#/store';
+
+import CaptchaImage from './captcha-image.vue';
 
 defineOptions({ name: 'Login' });
 
 const authStore = useAuthStore();
 
-const MOCK_USER_OPTIONS: BasicOption[] = [
-  {
-    label: 'Super',
-    value: 'vben',
-  },
-  {
-    label: 'Admin',
-    value: 'admin',
-  },
-  {
-    label: 'User',
-    value: 'jack',
-  },
-];
+/**
+ * 当前验证码 key（后端生成，登录时回传）。
+ * 由 CaptchaImage 组件通过 onKeyChange 回调写入；提交时随表单一并发送。
+ */
+const captchaKey = ref('');
+
+/**
+ * 提交处理：把表单值（username/password/captchaCode）+ captchaKey 合并发给 authStore。
+ */
+async function handleSubmit(values: Record<string, any>) {
+  await authStore.authLogin({
+    captchaCode: values?.captchaCode,
+    captchaKey: captchaKey.value,
+    password: values?.password,
+    username: values?.username,
+  });
+}
 
 const formSchema = computed((): VbenFormSchema[] => {
-  return [
-    {
-      component: 'VbenSelect',
-      componentProps: {
-        options: MOCK_USER_OPTIONS,
-        placeholder: $t('authentication.selectAccount'),
-      },
-      fieldName: 'selectAccount',
-      label: $t('authentication.selectAccount'),
-      rules: z
-        .string()
-        .min(1, { message: $t('authentication.selectAccount') })
-        .optional()
-        .default('vben'),
-    },
+  const schema: VbenFormSchema[] = [
     {
       component: 'VbenInput',
       componentProps: {
         placeholder: $t('authentication.usernameTip'),
-      },
-      dependencies: {
-        trigger(values, form) {
-          if (values.selectAccount) {
-            const findUser = MOCK_USER_OPTIONS.find(
-              (item) => item.value === values.selectAccount,
-            );
-            if (findUser) {
-              form.setValues({
-                password: '123456',
-                username: findUser.value,
-              });
-            }
-          }
-        },
-        triggerFields: ['selectAccount'],
       },
       fieldName: 'username',
       label: $t('authentication.username'),
@@ -79,13 +53,22 @@ const formSchema = computed((): VbenFormSchema[] => {
       rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
     {
-      component: markRaw(SliderCaptcha),
-      fieldName: 'captcha',
-      rules: z.boolean().refine((value) => value, {
-        message: $t('authentication.verifyRequiredTip'),
-      }),
+      component: markRaw(CaptchaImage),
+      // 图片验证码：自定义组件，绑定 captchaCode（defineModel），
+      // 并通过 componentProps.onKeyChange 回收后端生成的 captchaKey。
+      componentProps: {
+        placeholder: '请输入验证码',
+        onKeyChange: (key: string) => {
+          captchaKey.value = key;
+        },
+      },
+      fieldName: 'captchaCode',
+      label: '验证码',
+      rules: z.string().min(1, { message: '请输入验证码' }).default(''),
     },
   ];
+
+  return schema;
 });
 </script>
 
@@ -93,6 +76,6 @@ const formSchema = computed((): VbenFormSchema[] => {
   <AuthenticationLogin
     :form-schema="formSchema"
     :loading="authStore.loginLoading"
-    @submit="authStore.authLogin"
+    @submit="handleSubmit"
   />
 </template>

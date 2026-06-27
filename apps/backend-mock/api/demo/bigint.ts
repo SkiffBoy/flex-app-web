@@ -9,7 +9,7 @@ export default eventHandler(async (event) => {
   }
   const data = `
   {
-    "code": 0,
+    "code": "ok",
     "message": "success",
     "data": [
               {

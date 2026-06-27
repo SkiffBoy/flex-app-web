@@ -7,8 +7,10 @@ import { initStores } from '@vben/stores';
 import '@vben/styles';
 import '@vben/styles/antdv-next';
 
+import { setHttpClient } from '@flex/shared';
 import { useTitle } from '@vueuse/core';
 
+import { requestClient } from '#/api/request';
 import { $t, setupI18n } from '#/locales';
 
 import { initComponentAdapter } from './adapter/component';
@@ -45,6 +47,9 @@ async function bootstrap(namespace: string) {
 
   // 配置 pinia-tore
   await initStores(app, { namespace });
+
+  // 注入 http client 给插件（@flex/shared S1 决策：插件继承主 Shell Token + Result 解壳）
+  setHttpClient(requestClient);
 
   // 安装权限指令
   registerAccessDirective(app);

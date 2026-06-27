@@ -248,6 +248,7 @@ async function loadLibraryPlugins(
   ]);
 }
 
+export { flexImportMap } from './flex-importmap';
 export {
   loadApplicationPlugins,
   loadLibraryPlugins,
